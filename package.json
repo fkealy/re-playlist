@@ -1,0 +1,23 @@
+{
+  "name": "express-react-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^6.5.1"
+  },
+  "scripts": {
+    "client": "yarn workspace @replaylist/client",
+    "common": "yarn workspace @replaylist/common",
+    "server": "yarn workspace @replaylist/server",
+    "dev": "yarn client dev & yarn server dev --verbose",
+    "start": "yarn server start"
+  },
+  "dependencies": {
+    "react-scripts": "5.0.1"
+  }
+}

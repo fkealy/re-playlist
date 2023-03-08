@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.icon {
+  margin-left: 5px;
+}
+
+#body {
+  margin: auto;
+  max-width: max-content;
+}
