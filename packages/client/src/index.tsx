@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/app/App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import reducer from './reducers';
-import { createStore } from 'redux';
+import { store }  from './app/store';
+
 
 function Root() {
-
-const store = createStore(reducer)
     return (
       <React.StrictMode>
         <Provider store={store}>
@@ -18,6 +16,10 @@ const store = createStore(reducer)
       </React.StrictMode>
     );
 }
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 // render town
 ReactDOM.render(<Root />, document.getElementById('root'));
 

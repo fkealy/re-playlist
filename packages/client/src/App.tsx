@@ -1,8 +1,8 @@
 import React from 'react';
-import Login from './Login';
+import Login from './features/login/Login';
 import { HashRouter as Router, Routes, Route} from "react-router-dom";
-import User from './User';
-import Error from './Error';
+import User from './features/User';
+import Error from './features/error/Error';
 
 function App() {
   return (

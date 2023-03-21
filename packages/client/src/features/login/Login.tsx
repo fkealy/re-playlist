@@ -1,6 +1,6 @@
 import React from "react";
 import LoginSVG from './LoginSvg';
-import LogoSvg from './LogoSvg';
+import LogoSvg from '../../assets/LogoSvg';
 
 const Login: React.FC<{}> = () => {
 

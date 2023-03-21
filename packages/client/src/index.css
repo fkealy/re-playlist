@@ -31,6 +31,7 @@ code {
 }
 .selectContainer {
   display: inline-block;
+  vertical-align: top;
 }
 
 .select {
@@ -46,6 +47,7 @@ code {
 .button {
   width: 75px;
   height: 41px;
+  padding-left: 34px !important;
 }
 
 .user {
