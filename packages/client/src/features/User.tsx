@@ -7,6 +7,7 @@ import PlaylistPicker from './PlaylistPicker';
 
 function User() {
   const { accessToken, refreshToken } = useParams();
+  console.log("ACCESS TOKEN:", accessToken);
   const dispatch = useAppDispatch();
   dispatch({type: 'auth/setToken', payload: accessToken })
   dispatch(getUserPlaylists())
