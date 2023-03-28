@@ -14,12 +14,15 @@
     "client": "yarn workspace @replaylist/client",
     "common": "yarn workspace @replaylist/common",
     "server": "yarn workspace @replaylist/server",
-    "dev": "yarn client dev & yarn server dev --verbose",
-    "start": "yarn server start"
+    "dev": "concurrently \"yarn server dev --verbose\" \"yarn client start --watch\"",
+    "start": "yarn workspace @replaylist/client start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
+    "concurrently": "^7.6.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.22",
     "react-query": "^3.39.3",
-    "react-scripts": "5.0.1"
+    "react-scripts": "^5.0.1"
   }
 }

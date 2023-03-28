@@ -1,55 +1,24 @@
 import LogoSvg from '../assets/LogoSvg';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/joy';
-import { ArrowRight } from '@mui/icons-material';
-import Option from '@mui/joy/Option';
-import Select from '@mui/joy/Select';
-import { getUserPlaylists, selectPlaylistNames } from '../features/user/userPlaylistsSlice'
+import { getUserPlaylists, getGenreSeeds, selectIsLoading } from './user/userSlice'
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-
-
-
-function SelectBasic() {
-  const playlists = useAppSelector(selectPlaylistNames);
-  console.log(playlists);
-  return (
-    <Select className = "select" variant="soft" color="warning" placeholder="Select your playlist">
-      <Option value="dog">Dog</Option>
-      <Option value="cat">Cat</Option>
-    </Select>
-  );
-}
+import PlaylistPicker from './PlaylistPicker';
 
 function User() {
-
-
   const { accessToken, refreshToken } = useParams();
   const dispatch = useAppDispatch();
   dispatch({type: 'auth/setToken', payload: accessToken })
-
-
-  const onClick = () => {
-    dispatch(getUserPlaylists())
-  }
+  dispatch(getUserPlaylists())
+  dispatch(getGenreSeeds())
   
   return (
-    <div className="user">
-      <LogoSvg/>
-      <div className="buttonContainer">
-      <Button className = "button"
-          color="success"
-          disabled={false}
-          onClick={() =>onClick()}
-          size="md"
-          variant="solid"
-          startDecorator={<ArrowRight />}> 
-        Next
-      </Button>
-      </div>
-      <div className="selectContainer">
-      <SelectBasic/>
-      </div>
-    </div>
+  <div className="user">
+    <LogoSvg/>
+    { useAppSelector(selectIsLoading)  ?
+      <Button loading loadingPosition="start" variant="outlined">
+      </Button> : <PlaylistPicker/> }
+  </div>
   );
 }
 

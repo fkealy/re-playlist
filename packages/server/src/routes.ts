@@ -52,7 +52,7 @@ router.get('/callback', (req, res) => {
   const { code, state } = req.query;
   // first do state validation
   if (state === null) {
-    res.redirect('/#/error/state mismatch');
+    res.redirect('/error/state mismatch');
   // if the state is valid, get the authorization code and pass it on to the client
   } else {
     res.clearCookie(STATE_KEY);
@@ -70,9 +70,9 @@ router.get('/callback', (req, res) => {
       });
 
       // we can also pass the token to the browser to make requests from there
-      res.redirect(`/#/user/${access_token}/${refresh_token}`);
+      res.redirect(`/user/${access_token}/${refresh_token}`);
     }).catch(err => {
-      res.redirect('/#/error/invalid token');
+      res.redirect('/error/invalid token');
     });
   }
 });
