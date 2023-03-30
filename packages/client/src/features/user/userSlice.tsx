@@ -46,6 +46,7 @@ export const getGenreSeeds = (): AppThunk => async (dispatch, getState) => {
     var response = await getState().userPlaylists.spotifyApi.getAvailableGenreSeeds();
     console.log(response);
     dispatch(setGenres(response.genres))
+    dispatch(setIsLoadingGenres(false))
 }
 
 export const userSlice = createSlice({
@@ -55,6 +56,7 @@ export const userSlice = createSlice({
         tracks: [] as any,
         genres: [] as any,
         selectedPlaylist: {},
+        selectedGenres: {},
         isLoadingPlaylists: true,
         isLoadingTracks: true,
         isLoadingGenres: true,
@@ -76,17 +78,20 @@ export const userSlice = createSlice({
         setPlaylists: (state, action: PayloadAction<Object>) => {
             state.playlists = state.playlists.concat(action.payload)
         },
-        choosePlaylist: (state, action: PayloadAction<String>) => {
-            state.selectedPlaylist = action.payload
+        setSelectedPlaylists: (state, action: PayloadAction<String>) => {
+            state.selectedPlaylist =action.payload
         },
         setGenres: (state, action: PayloadAction<Object>) => {
             state.genres = action.payload
-        }
+        },
+        userSelectedGenres: (state, action: PayloadAction<Object>) => {
+            state.genres = action.payload
+        },
     },
 });
 
-export const { setIsLoadingTracks, setIsLoadingPlaylists, setTracks, setPlaylists, choosePlaylist, setGenres } = userSlice.actions;
-export const selectPlaylistNames = (state: RootState) => state.userPlaylists.playlists.map(playlist => playlist.name);
+export const { setIsLoadingTracks, setIsLoadingPlaylists, setIsLoadingGenres, setTracks, setPlaylists, setSelectedPlaylists: choosePlaylist, setGenres } = userSlice.actions;
+export const selectPlaylistNames = (state: RootState) => state.userPlaylists.playlists.map(playlist => ({ name: playlist.name, id: playlist.id }));
 export const selectIsLoading = (state: RootState) => state.userPlaylists.isLoadingGenres && state.userPlaylists.isLoadingPlaylists;
 export const selectGenres = (state: RootState) => state.userPlaylists.genres;
 

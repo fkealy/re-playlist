@@ -13,8 +13,12 @@ const port = process.env.port || 3000;
 // Serve static resources from the "public" folder (ex: when there are images to display)
 app.use(express.static(join(__dirname, clientPath)));
 
+// Serve the React application for any routes that don't match a static resource
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, clientPath, 'index.html'));
+});
+
 // start the Express server
 app.listen(port, () => {
     console.log(`app ${App_Name} started at http://localhost:${port}` );
 });
-  

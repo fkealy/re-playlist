@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/joy';
 import { getUserPlaylists, getGenreSeeds, selectIsLoading } from './user/userSlice'
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import PlaylistPicker from './PlaylistPicker';
+import { Navigate } from 'react-router-dom';
 
 function User() {
   const { accessToken, refreshToken } = useParams();
@@ -15,9 +15,9 @@ function User() {
   return (
   <div className="user">
     <LogoSvg/>
-    { useAppSelector(selectIsLoading)  ?
+    { useAppSelector(selectIsLoading) ?
       <Button loading loadingPosition="start" variant="outlined">
-      </Button> : <PlaylistPicker/> }
+      </Button> : <Navigate to='/playlist-picker'/>}
   </div>
   );
 }
