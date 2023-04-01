@@ -1,12 +1,14 @@
 
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice'
-import userPlaylistsReducer from '../features/user/userSlice'
+import userReducer from '../features/user/userSlice'
+import resultReducer from '../features/result/resultSlice'
 
 export const store =  configureStore({
   reducer: {
     auth: authReducer,
-    userPlaylists: userPlaylistsReducer,
+    user: userReducer,
+    result: resultReducer
   }
 })
 

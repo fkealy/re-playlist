@@ -8,14 +8,13 @@ function GenrePicker() {
     var genres = [];
     const dispatch = useAppDispatch();
     const handleChange = (value) => {
-        genres = value;
-        console.log(genres);
+        dispatch({type: 'user/setSelectedGenres', payload: value})
     };
 
     return (
         <div>
             <div className="buttonContainer">
-                <Link to='/genre-picker'>
+                <Link to='/result'>
                     <Button className = "button"
                         color="success"
                         disabled={false}
@@ -23,7 +22,7 @@ function GenrePicker() {
                         variant="solid"
                         startDecorator={<ArrowRight />}
                         onClick={() => {
-                            dispatch({type: 'user/setSelectedGenres', payload: genres })
+                            dispatch({type: 'result/getResults' })
                         }}> 
                         Go
                     </Button>

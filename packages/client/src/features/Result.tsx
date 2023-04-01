@@ -1,28 +1,13 @@
-import LogoSvg from '../assets/LogoSvg';
-import { useParams } from 'react-router-dom';
-import { Button, Chip } from '@mui/joy';
-import { ArrowRight } from '@mui/icons-material';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { getResults } from './result/resultSlice';
 
-function Result() {  
-  return (
-    <div className="user">
-        <LogoSvg/>
-        <div className="buttonContainer">
-            <Button className = "button"
-                color="success"
-                disabled={false}
-                onClick={() => {}}
-                size="md"
-                variant="solid"
-                startDecorator={<ArrowRight />}> 
-                Finish
-            </Button>
+function Result() { 
+    const dispatch = useAppDispatch();
+    dispatch(getResults())
+    return (
+        <div className="user">
         </div>
-        <div className="selectContainer">
-           
-        </div>
-    </div>
-  );
+    );
 }
 
 export default Result;

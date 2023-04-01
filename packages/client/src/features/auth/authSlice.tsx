@@ -10,7 +10,6 @@ const initialState = {
     spotifyApi: {}
 }
 
-
 const authSlice = createSlice({
     name: 'auth',
     initialState,

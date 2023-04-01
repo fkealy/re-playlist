@@ -1,4 +1,3 @@
-import React from 'react';
 import Login from './features/login/Login';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import User from './features/User';
@@ -18,7 +17,7 @@ function App() {
                 <Route path='user/:accessToken/:refreshToken' element={<User/>} />
                 <Route path='playlist-picker' element={<PlaylistPicker/>} />
                 <Route path='genre-picker' element={<GenrePicker/>} />
-                <Route path='result' element={<GenrePicker/>} />
+                <Route path='result' element={<Result/>} />
                 <Route path='error/:errorMsg' element={<Error/>} />
             </Routes>
           </BrowserRouter>

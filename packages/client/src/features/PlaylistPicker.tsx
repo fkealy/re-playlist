@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Button, Option, Select } from '@mui/joy';
 import { ArrowRight } from '@mui/icons-material';
-import { selectPlaylistNames } from './user/userSlice'
+import { getPlaylistTracks, selectPlaylistNames } from './user/userSlice'
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 
 var playlist;
 
 function PlaylistSelect() {
+    const dispatch = useAppDispatch();
     const handleChange = (value) => {
-        playlist = value;
+        dispatch({type: 'user/setSelectedPlaylist', payload: value})
     };
 
     return (
@@ -48,7 +49,7 @@ function PlaylistPicker() {
                     variant="solid"
                     startDecorator={<ArrowRight/>}
                     onClick={() => {
-                        dispatch({type: 'user/setSelectedPlaylists', payload: playlist })
+                        dispatch(getPlaylistTracks())
                     }}> 
                     Next
                     </Button>
