@@ -32,10 +32,10 @@ export const getResults = (): AppThunk => async (dispatch, getState) => {
 
                 // Add a 1-second delay after processing every 20 audio features
                 if ((index + 1) % 20 === 0) {
-                await new Promise((resolve) => setTimeout(resolve, 1000));
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
                 }
                 } catch (error) {
-                console.error(`Error fetching recommendations for audio feature ${index}:`, error);
+                    console.error(`Error fetching recommendations for audio feature ${index}:`, error);
                 }
         });
 
