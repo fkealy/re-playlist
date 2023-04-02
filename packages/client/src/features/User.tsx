@@ -6,9 +6,12 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { Navigate } from 'react-router-dom';
 
 function User() {
-  const { accessToken, refreshToken } = useParams();
+  const { userId, country, accessToken, refreshToken } = useParams();
+  console.log(userId)
   const dispatch = useAppDispatch();
   dispatch({type: 'auth/setToken', payload: accessToken })
+  dispatch({type: 'auth/setUserId', payload: userId })
+  dispatch({type: 'auth/setCountry', payload: country})
   dispatch(getUserPlaylists())
   dispatch(getGenreSeeds())
   

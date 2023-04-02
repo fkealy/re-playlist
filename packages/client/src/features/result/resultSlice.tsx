@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { AppThunk, RootState } from '../../app/store';
 
@@ -11,23 +11,47 @@ export const getResults = (): AppThunk => async (dispatch, getState) => {
     var audioFeatures = await getAudioFeaturesForAllTracks(tracks, spotifyApi);
     
     // get Recommendations for each track
-    audioFeatures.forEach(async element => {
-        var recommendedTrack = await spotifyApi.getRecommendations({
-            seed_genres: state.user.selectedGenres,
-            target_energy: element.energy,
-            target_tempo: element.tempo,
-            target_danceability: element.danceability,
-            target_duration_ms: element.duration_ms,
-            target_loudness: element.loudness,
-            target_liveness: element.liveness,
-            target_popularity: 100,
-            limit: 1
-         })
-    });
+    let recommendedTrackUris = [] as any[];
+
+    await asyncForEach(audioFeatures, async (element, index) => {
+        try {
+            const recommendations = await spotifyApi.getRecommendations({
+                seed_genres: state.user.selectedGenres,
+                target_energy: element.energy,
+                target_tempo: element.tempo,
+                target_danceability: element.danceability,
+                target_duration_ms: element.duration_ms,
+                target_loudness: element.loudness,
+                target_liveness: element.liveness,
+                market: state.auth.country,
+                limit: 1,
+                });
+
+                console.log(recommendations);
+                recommendedTrackUris.push(recommendations.tracks[0].uri);
+
+                // Add a 1-second delay after processing every 20 audio features
+                if ((index + 1) % 20 === 0) {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                }
+                } catch (error) {
+                console.error(`Error fetching recommendations for audio feature ${index}:`, error);
+                }
+        });
 
     // create new playlist with each recommendation
-
+    const newPlaylist = await spotifyApi.createPlaylist(state.auth.userId, { name: "RE:PLAYLIST" });
+        spotifyApi.addTracksToPlaylist(newPlaylist.id, recommendedTrackUris).then(() => {
+        dispatch(setPlaylistId(newPlaylist.id));
+        dispatch(setIsLoading(false));
+    });
 }
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+  }  
 
 async function getAudioFeaturesForAllTracks(tracks: any[], spotifyApi: SpotifyWebApi.SpotifyWebApiJs) {
     const chunkSize = 100;
@@ -53,16 +77,24 @@ async function getAudioFeaturesForAllTracks(tracks: any[], spotifyApi: SpotifyWe
 
 const initialState = {
     isLoading: true,
-    result: {}
+    playlistId: ""
 }
 
 const resultSlice = createSlice({
     name: 'result',
     initialState,
     reducers: {
+        setIsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload;
+        },
+        setPlaylistId: (state, action) => {
+            state.playlistId = "https://embed.spotify.com/?uri=spotify:playlist:" + action.payload;
+        }
     },
     extraReducers: {},
 })
 
+export const { setIsLoading, setPlaylistId } = resultSlice.actions;
 export const selectIsLoading = (state: RootState) => state.result.isLoading;
+export const selectPlaylistId = (state: RootState) => state.result.playlistId;
 export default resultSlice.reducer

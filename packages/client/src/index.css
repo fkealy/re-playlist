@@ -55,3 +55,7 @@ code {
   margin:auto;
   display: inline-table;
 }
+
+.iframe {
+  text-align: center;
+}

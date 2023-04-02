@@ -4,7 +4,6 @@ import { ArrowRight } from '@mui/icons-material';
 import { getPlaylistTracks, selectPlaylistNames } from './user/userSlice'
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 
-var playlist;
 
 function PlaylistSelect() {
     const dispatch = useAppDispatch();

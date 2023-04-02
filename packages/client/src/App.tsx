@@ -14,7 +14,7 @@ function App() {
             <BrowserRouter basename='/'>
             <Routes>
                 <Route path='/' element={<Login/>}/>
-                <Route path='user/:accessToken/:refreshToken' element={<User/>} />
+                <Route path='user/:userId/:country/:accessToken/:refreshToken' element={<User/>} />
                 <Route path='playlist-picker' element={<PlaylistPicker/>} />
                 <Route path='genre-picker' element={<GenrePicker/>} />
                 <Route path='result' element={<Result/>} />

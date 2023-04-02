@@ -7,7 +7,9 @@ const initialState = {
     refreshToken: null, 
     error: null,
     success: false,
-    spotifyApi: {}
+    spotifyApi: {},
+    userId: "",
+    country: "",
 }
 
 const authSlice = createSlice({
@@ -19,6 +21,14 @@ const authSlice = createSlice({
             spotifyApi.setAccessToken(action.payload);
             state.accessToken = action.payload;
             state.spotifyApi = spotifyApi;
+        },
+        setUserId: (state, action) => {
+            console.log(action);
+            state.userId = action.payload;
+        },
+        setCountry: (state, action) => {
+            console.log(action);
+            state.country = action.payload;
         }
     },
     extraReducers: {},
