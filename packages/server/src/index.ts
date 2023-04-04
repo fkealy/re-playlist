@@ -3,12 +3,12 @@ import cors from 'cors';
 import { join } from 'path';
 import routes from './routes';
 
-import { App_Name } from '@replaylist/common';
 const clientPath = '../../client/build';
 const app = express();
 app.use(cors())
   .use('/', routes);
 const port = process.env.port || 3000;
+const App_Name = process.env.APP_NAME;
 
 // Serve static resources from the "public" folder (ex: when there are images to display)
 app.use(express.static(join(__dirname, clientPath)));

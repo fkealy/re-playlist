@@ -6,9 +6,6 @@
     "outDir": "build",
     "isolatedModules": false,
   },
-  "references": [
-    { "path": "../common" }
-  ],
   "include": [
     "src"
   ]
