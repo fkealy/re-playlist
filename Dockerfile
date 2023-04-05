@@ -13,6 +13,8 @@ COPY packages/server/*.json ./packages/server/
 ENV NODE_ENV production
 
 # Install dependencies
+SHELL ["/bin/bash", "-c"]
+
 RUN yarn install
 
 RUN npm install modclean -g && \
