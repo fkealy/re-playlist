@@ -57,7 +57,6 @@ export const getSavedTracks = (): AppThunk => (dispatch, getState) => {
 async function fetchPaginatedSavedTracks(spotifyApi, dispatch, offsetCount: number, offset: object) {
     var response = await spotifyApi.getMySavedTracks(offset);
     dispatch(setTracks(response.items));
-    console.log(response.items)
     offsetCount += response.items.length;
     if(offsetCount < response.total){
         fetchPaginatedSavedTracks(spotifyApi, dispatch, offsetCount, { offset: offsetCount })
