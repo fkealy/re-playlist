@@ -13,7 +13,7 @@ COPY packages/server/*.json ./packages/server/
 ENV NODE_ENV production
 
 # Install dependencies
-RUN yarn install --immutable
+RUN yarn install
 
 RUN npm install modclean -g && \
     rm -rf node_modules/*/test/ node_modules/*/tests/ && \
