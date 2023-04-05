@@ -32,7 +32,6 @@ const generateRandomString = N => (Math.random().toString(36)+Array(N).join('0')
  * state in the cookie.
  */
 router.get('/login', (_, res) => {
-  console.log("SERVER LOGIN")
   const state = generateRandomString(16);
   res.cookie(STATE_KEY, state);
   var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
