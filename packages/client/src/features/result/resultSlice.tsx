@@ -27,7 +27,6 @@ export const getResults = (): AppThunk => async (dispatch, getState) => {
                 limit: 1,
                 });
 
-                console.log(recommendations);
                 recommendedTrackUris.push(recommendations.tracks[0].uri);
 
                 // Add a 1-second delay after processing every 20 audio features
