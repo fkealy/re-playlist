@@ -3,7 +3,7 @@
     "containerDefinitions": [
       {
         "name": "replaylist-container",
-        "image": "588324452158.dkr.ecr.eu-west-2.amazonaws.com/replaylist:latest",
+        "image": "588324452158.dkr.ecr.eu-west-2.amazonaws.com/replaylist:Latest",
         "essential": true,
         "memory": 512,
         "portMappings": [
