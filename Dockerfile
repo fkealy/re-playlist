@@ -52,5 +52,7 @@ COPY --from=BUILD /app/node_modules ./node_modules
 COPY --from=BUILD /app/packages/client/node_modules ./packages/client/node_modules
 COPY --from=BUILD /app/packages/server/node_modules ./packages/server/node_modules
 
+EXPOSE 3000
+
 # Start server
 CMD ["yarn", "workspace", "@replaylist/server", "start"]

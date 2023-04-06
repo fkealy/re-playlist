@@ -42,3 +42,7 @@ build/Release
 # Typescript v1 declaration files
 typings/
 dist
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
