@@ -1,16 +1,19 @@
 {
-    "AWSEBDockerrunVersion": "1",
-    "Image": {
-      "Name": "588324452158.dkr.ecr.us-west-2.amazonaws.com/staging/replaylist:latest",
-      "Update": "true"
-    },
-    "Ports": [
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
       {
-        "ContainerPort": 8080
-      },
-      {
-        "ContainerPort": 3000,
-        "HostPort": 3000
+        "name": "replaylist-container",
+        "image": "588324452158.dkr.ecr.eu-west-2.amazonaws.com/replaylist:Latest",
+        "essential": true,
+        "memory": 512,
+        "mountPoints": [],
+        "portMappings": [
+          {
+            "hostPort": 3000,
+            "containerPort": 3000
+          }
+        ],
+        "dockerLabels": {}
       }
     ]
   }

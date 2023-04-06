@@ -1,0 +1,11 @@
+version: "3.6"
+
+services:
+  app:
+    image: "replaylist"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: replaylist-container
+    ports:
+      - "3000:3000"
