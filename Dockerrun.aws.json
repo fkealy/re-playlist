@@ -8,5 +8,12 @@
       {
         "ContainerPort": "3000"
       }
+    ],
+    "ContainerDefinitions": [
+      {
+        "Name": "replaylist-container",
+        "Memory": 512
+      }
     ]
   }
+  
