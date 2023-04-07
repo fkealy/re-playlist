@@ -11,6 +11,16 @@
             "hostPort": 3000,
             "containerPort": 3000
           }
+        ],
+        "environment": [
+          {
+            "name": "PORT",
+            "value": "3000"
+          },
+          {
+            "name": "APP_NAME",
+            "value": "RE:PLAYLIST"
+          }
         ]
       }
     ]
