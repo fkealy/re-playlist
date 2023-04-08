@@ -16,12 +16,23 @@
           {
             "name": "PORT",
             "value": "3000"
-          },
+          }
+        ],
+        "mountPoints": [
           {
-            "name": "APP_NAME",
-            "value": "RE:PLAYLIST"
+            "sourceVolume": "env",
+            "containerPath": "/app/.env"
           }
         ]
       }
+    ],
+    "volumes": [
+      {
+        "name": "env",
+        "host": {
+          "sourcePath": "/var/app/current/.env"
+        }
+      }
     ]
   }
+  
