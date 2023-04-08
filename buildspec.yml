@@ -19,6 +19,4 @@ phases:
 artifacts:
   files:
     - 'Dockerrun.aws.json'
-    - 'docker-compose.yml'
-    - '.ebextensions/**/*'
-  base-directory: './'
+    - 'docker-compose.eb.yml'
