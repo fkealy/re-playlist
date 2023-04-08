@@ -12,16 +12,10 @@
             "containerPort": 3000
           }
         ],
-        "environment": [
-          {
-            "name": "PORT",
-            "value": "3000"
-          }
-        ],
         "mountPoints": [
           {
             "sourceVolume": "env",
-            "containerPath": "/app/.env"
+            "containerPath": "/app/packages/server/.env"
           }
         ]
       }
@@ -30,7 +24,7 @@
       {
         "name": "env",
         "host": {
-          "sourcePath": "/var/app/current/.env"
+          "sourcePath": "/var/app/current/packages/server/.env"
         }
       }
     ]
