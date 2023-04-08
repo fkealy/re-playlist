@@ -8,4 +8,4 @@ services:
     environment:
       - DEBUG=1
     env_file:
-      - /var/app/current/packages/server/.env
+      - ${ENV_FILE_PATH}
