@@ -13,14 +13,6 @@
           }
         ]
       }
-    ],
-    "volumes": [
-      {
-        "name": "env",
-        "host": {
-          "sourcePath": "/var/app/current/packages/server/.env"
-        }
-      }
     ]
   }
   
