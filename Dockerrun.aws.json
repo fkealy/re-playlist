@@ -11,12 +11,6 @@
             "hostPort": 3000,
             "containerPort": 3000
           }
-        ],
-        "mountPoints": [
-          {
-            "sourceVolume": "env",
-            "containerPath": "/app/packages/server/.env"
-          }
         ]
       }
     ],
