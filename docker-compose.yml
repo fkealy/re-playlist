@@ -1,11 +1,11 @@
 version: "3.6"
 services:
   app:
-    build: .
+    image: "588324452158.dkr.ecr.eu-west-2.amazonaws.com/replaylist:Latest"
     container_name: replaylist-container
     ports:
       - "3000:3000"
     environment:
       - DEBUG=1
     env_file:
-      - ./packages/server/.env
+      - .env
