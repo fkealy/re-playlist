@@ -1,6 +1,9 @@
 version: "3.6"
 services:
   app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: "588324452158.dkr.ecr.eu-west-2.amazonaws.com/replaylist:Latest"
     container_name: replaylist-container
     ports:
@@ -8,4 +11,4 @@ services:
     environment:
       - DEBUG=1
     env_file:
-      - .env
+      - ./packages/server/.env
