@@ -7,5 +7,4 @@ services:
       - "3000:3000"
     environment:
       - DEBUG=1
-    env_file:
-      - ${ENV_FILE_PATH}
+      - env_file=/var/app/current/packages/server/.env
