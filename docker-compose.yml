@@ -10,5 +10,6 @@ services:
       - "3000:3000"
     environment:
       - DEBUG=1
+      - ENV_FILE_PATH=${ENV_FILE_PATH:-./packages/server/.env}
     env_file:
-      - ./packages/server/.env
+      - ${ENV_FILE_PATH}
