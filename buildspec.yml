@@ -21,4 +21,4 @@ artifacts:
     - 'Dockerrun.aws.json'
     - 'docker-compose.yml'
     - '.ebextensions/**/*'
-  discard-paths: yes
+  base-directory: './'
