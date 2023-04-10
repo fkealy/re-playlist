@@ -28,6 +28,7 @@ export const getResults = (): AppThunk => async (dispatch, getState) => {
                 });
 
                 recommendedTrackUris.push(recommendations.tracks[0].uri);
+                dispatch(setLoadingPercentage(100 * recommendedTrackUris.length/tracks.length))
 
                 // Add a 1-second delay after processing every 20 audio features
                 if ((index + 1) % 20 === 0) {
@@ -76,7 +77,8 @@ async function getAudioFeaturesForAllTracks(tracks: any[], spotifyApi: SpotifyWe
 
 const initialState = {
     isLoading: true,
-    playlistId: ""
+    playlistId: "",
+    loadingPercentage: 0,
 }
 
 const resultSlice = createSlice({
@@ -88,12 +90,16 @@ const resultSlice = createSlice({
         },
         setPlaylistId: (state, action) => {
             state.playlistId = "https://embed.spotify.com/?uri=spotify:playlist:" + action.payload;
+        },
+        setLoadingPercentage: (state, action) => {
+            state.loadingPercentage = action.payload;
         }
     },
     extraReducers: {},
 })
 
-export const { setIsLoading, setPlaylistId } = resultSlice.actions;
+export const selectLoadingPercentage = (state: RootState) => state.result.loadingPercentage;
+export const { setIsLoading, setPlaylistId, setLoadingPercentage } = resultSlice.actions;
 export const selectIsLoading = (state: RootState) => state.result.isLoading;
 export const selectPlaylistId = (state: RootState) => state.result.playlistId;
 export default resultSlice.reducer

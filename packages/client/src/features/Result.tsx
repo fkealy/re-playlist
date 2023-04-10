@@ -1,7 +1,10 @@
 import { Button } from '@mui/joy';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { getResults, selectIsLoading, selectPlaylistId } from './result/resultSlice';
+import { getResults, selectIsLoading, selectLoadingPercentage, selectPlaylistId } from './result/resultSlice';
 import { useEffect, useState } from 'react';
+import LinearProgress from '@mui/joy/LinearProgress';
+import Typography from '@mui/joy/Typography';
+
 
 function Result() {
   const dispatch = useAppDispatch();
@@ -12,6 +15,7 @@ function Result() {
   }, [dispatch]);
 
   const isLoading = useAppSelector(selectIsLoading);
+  const progress = useAppSelector(selectLoadingPercentage);
   const playlistSrc = useAppSelector(selectPlaylistId);
 
   useEffect(() => {
@@ -24,8 +28,29 @@ function Result() {
 
   return (
       isLoading ? (
-        <Button loading loadingPosition="start" variant="outlined">
-        </Button>
+          <LinearProgress
+            determinate
+            variant="outlined"
+            color="neutral"
+            size="sm"
+            thickness={32}
+            value={progress}
+            sx={{
+              '--LinearProgress-radius': '0px',
+              '--LinearProgress-progressThickness': '24px',
+              boxShadow: 'sm',
+              borderColor: 'neutral.500',
+            }}
+          >
+            <Typography
+              level="body3"
+              fontWeight="xl"
+              textColor="common.white"
+              sx={{ mixBlendMode: 'difference' }}
+            >
+              LOADING… {`${Math.round(progress)}%`}
+            </Typography>
+          </LinearProgress>
       ) : (
         <div className='iframe'>
           {showIframe && (
