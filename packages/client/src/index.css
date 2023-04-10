@@ -15,6 +15,19 @@ code {
     monospace;
 }
 
+.darkMode {
+  position: fixed;
+  margin: 10px;
+  top: 0;
+  left: 0;
+}
+
+.logout {
+  position: fixed;
+  margin: 10px;
+  top: 0;
+  right: 0;
+}
 
 .login {
   position: fixed;
@@ -28,9 +41,17 @@ code {
   text-align: center;
   display: block;
   padding-bottom: 38px;
+  max-width: fit-content;
+  margin: auto;
 }
+
+.userInputContainer{
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .selectContainer {
-  display: inline-block;
   vertical-align: top;
 }
 
@@ -39,7 +60,7 @@ code {
 }
 
 .buttonContainer {
-  display: inline-block;
+  align-self: center;
   padding-left: 16px;
 }
 
@@ -51,7 +72,7 @@ code {
 
 .user {
   position:absolute; 
-  top:0; left:0; right:0; bottom:0; 
+  top:35%; left:0; right:0;
   margin:auto;
   display: inline-table;
 }

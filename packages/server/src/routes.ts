@@ -26,6 +26,11 @@ const spotifyApi = new Spotify({
 /** Generates a random string containing numbers and letters of N characters */
 const generateRandomString = N => (Math.random().toString(36)+Array(N).join('0')).slice(2, N+2);
 
+router.get('/logout', (_,res) => {
+  spotifyApi.setAccessToken('');
+  spotifyApi.setRefreshToken('');
+  res.redirect('/')
+})
 /**
  * The /login endpoint
  * Redirect the client to the spotify authorize url, but first set that user's
@@ -34,7 +39,7 @@ const generateRandomString = N => (Math.random().toString(36)+Array(N).join('0')
 router.get('/login', (_, res) => {
   const state = generateRandomString(16);
   res.cookie(STATE_KEY, state);
-  var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
+  var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state, true);
 
 // https://accounts.spotify.com:443/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https://example.com/callback&scope=user-read-private%20user-read-email&state=some-state-of-my-choice
   console.log(authorizeURL);

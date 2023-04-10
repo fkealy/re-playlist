@@ -1,20 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link as RouterLink} from 'react-router-dom';
+import Link from '@mui/joy/Link';
 import { Button, Chip, Autocomplete } from '@mui/joy';
 import { ArrowRight, Close } from '@mui/icons-material';
-import { selectGenres } from './user/userSlice';
+import { selectGenres, selectUserSelectedGenres } from './user/userSlice';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 
 function GenrePicker() { 
-    var genres = [];
+    var genres = useAppSelector(selectUserSelectedGenres);
     const dispatch = useAppDispatch();
     const handleChange = (value) => {
         dispatch({type: 'user/setSelectedGenres', payload: value})
     };
 
     return (
-        <div>
+        <div className="userInputContainer">
             <div className="buttonContainer">
-                <Link to='/result'>
+                <Link component={RouterLink }to='/result' underline="none">
                     <Button className = "button"
                         color="success"
                         disabled={false}
@@ -30,19 +31,20 @@ function GenrePicker() {
             </div>
             <div className="selectContainer">
                 <Autocomplete
+                    className="select"
                     multiple
-                    placeholder="Select your genres"
+                    placeholder="Select up to 5 genres"
                     onChange={(_, value) => handleChange(value)}
                     options={ useAppSelector(selectGenres)}
                     getOptionDisabled={() => genres.length > 4}
                     defaultValue={[]}
                     variant="plain"
-                    color="info"
+                    color="neutral"
                     renderTags={(tags, getTagProps) =>
                         tags.map((item, index) => (
                         <Chip
                             variant="solid"
-                            color="primary"
+                            color="neutral"
                             endDecorator={<Close/>}
                             {...getTagProps({ index })}
                         >
@@ -50,7 +52,6 @@ function GenrePicker() {
                         </Chip>
                         ))
                     }
-                    sx={{ maxWidth: '300px' }}
                     slotProps={{
                         listbox: {
                         sx: {

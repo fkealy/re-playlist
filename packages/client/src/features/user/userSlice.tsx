@@ -137,6 +137,8 @@ export const {
     } = userSlice.actions;
 export const selectPlaylistNames = (state: RootState) => state.user.playlists.map(playlist => ({ name: playlist.name, id: playlist.id }));
 export const selectIsLoading = (state: RootState) => state.user.isLoadingGenres && state.user.isLoadingPlaylists;
+export const selectIsPlaylistChosen = (state: RootState) => state.user.selectedPlaylist.length > 0;
 export const selectGenres = (state: RootState) => state.user.genres;
+export const selectUserSelectedGenres = (state: RootState) => state.user.selectedGenres;
 
 export default userSlice.reducer;

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { RootState } from '../../app/store';
 
 const initialState = {
     loading: false,
@@ -33,5 +34,7 @@ const authSlice = createSlice({
     },
     extraReducers: {},
 })
-  
+
+export const selectIsLoggedIn = (state: RootState) => state.auth.accessToken.length > 0;
+
 export default authSlice.reducer

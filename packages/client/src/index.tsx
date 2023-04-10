@@ -5,13 +5,29 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { store }  from './app/store';
+import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
+import { CssBaseline } from '@mui/joy';
 
+const theme = extendTheme({ cssVarPrefix: 'demo' });
 
 function Root() {
     return (
       <React.StrictMode>
         <Provider store={store}>
-          <App/>
+            <CssVarsProvider
+              defaultMode="system"
+              // The props below are specific to this demo,
+              // you might not need them in your app.
+              //
+              theme={theme}
+              // the local storage key to use.
+              modeStorageKey="demo_identify-system-mode"
+              // set as root provider
+              disableNestedContext
+            >
+            <CssBaseline />
+            <App/>
+          </CssVarsProvider>
         </Provider>
       </React.StrictMode>
     );
