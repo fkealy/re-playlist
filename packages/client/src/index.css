@@ -30,11 +30,10 @@ code {
 }
 
 .login {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  line-height: 5em;
+  height: 100%;
+  max-width: 350px;
+  display: block;
+  margin: auto;
 }
 
 .logo {
@@ -46,12 +45,14 @@ code {
 }
 
 .userInputContainer{
-  display: flex;
+  display: block;
   margin-left: 10px;
   margin-right: 10px;
+  text-align: center;
 }
 
 .selectContainer {
+  display: inline-block;
   vertical-align: top;
 }
 
@@ -60,6 +61,7 @@ code {
 }
 
 .buttonContainer {
+  display: inline-block;
   align-self: center;
   padding-left: 16px;
 }
@@ -70,11 +72,16 @@ code {
   padding-left: 34px !important;
 }
 
+.loadingBar{
+  max-width: 300px;
+  margin: auto;
+}
+
 .user {
   position:absolute; 
   top:35%; left:0; right:0;
   margin:auto;
-  display: inline-table;
+  display: block;
 }
 
 .iframe {

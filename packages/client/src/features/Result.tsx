@@ -28,29 +28,31 @@ function Result() {
 
   return (
       isLoading ? (
-          <LinearProgress
-            determinate
-            variant="outlined"
-            color="neutral"
-            size="sm"
-            thickness={32}
-            value={progress}
-            sx={{
-              '--LinearProgress-radius': '0px',
-              '--LinearProgress-progressThickness': '24px',
-              boxShadow: 'sm',
-              borderColor: 'neutral.500',
-            }}
-          >
-            <Typography
-              level="body3"
-              fontWeight="xl"
-              textColor="common.white"
-              sx={{ mixBlendMode: 'difference' }}
+          <div className='loadingBar'>
+            <LinearProgress
+              determinate
+              variant="outlined"
+              color="neutral"
+              size="sm"
+              thickness={32}
+              value={progress}
+              sx={{
+                '--LinearProgress-radius': '0px',
+                '--LinearProgress-progressThickness': '24px',
+                boxShadow: 'sm',
+                borderColor: 'neutral.500',
+              }}
             >
-              LOADING… {`${Math.round(progress)}%`}
-            </Typography>
-          </LinearProgress>
+              <Typography
+                level="body3"
+                fontWeight="xl"
+                textColor="common.white"
+                sx={{ mixBlendMode: 'difference' }}
+              >
+                LOADING… {`${Math.round(progress)}%`}
+              </Typography>
+            </LinearProgress>
+          </div>
       ) : (
         <div className='iframe'>
           {showIframe && (

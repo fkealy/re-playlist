@@ -8,14 +8,13 @@ import { store }  from './app/store';
 import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
 import { CssBaseline } from '@mui/joy';
 
-const theme = extendTheme({ cssVarPrefix: 'demo' });
-
 function Root() {
+  const theme = extendTheme({ cssVarPrefix: 'demo' });
     return (
       <React.StrictMode>
         <Provider store={store}>
             <CssVarsProvider
-              defaultMode="system"
+              defaultMode="dark"
               // The props below are specific to this demo,
               // you might not need them in your app.
               //
@@ -25,7 +24,7 @@ function Root() {
               // set as root provider
               disableNestedContext
             >
-            <CssBaseline />
+              <CssBaseline />
             <App/>
           </CssVarsProvider>
         </Provider>

@@ -10,7 +10,7 @@ export const LoginSvg = (props: LoginSvgProps) => {
   const fillColor = colorScheme.mode === "dark" ? "#000000" : "#FFFFFF";
 
   return (
-	<div onClick={onClick} style={{ width: '100%', height: '100%' }}>
+	<div className="login" onClick={onClick}>
 	<svg
 		version="1.1"
 		id="Layer_1"

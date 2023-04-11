@@ -13,7 +13,7 @@ const PORT = process.env.port || 3000;
 const REDIRECT_URI = process.env.redirect_uri || 'http://localhost:' + PORT +'/callback';
 const STATE_KEY = 'spotify_auth_state';
 // your application requests authorization
-const scopes = ['user-read-private', 'user-read-email', 'user-read-playback-state', 'user-library-read',
+const scopes = ['user-read-private', 'user-library-read',
  'playlist-modify-public', 'playlist-modify-private'];
 
 // configure spotify

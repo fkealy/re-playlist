@@ -1,11 +1,17 @@
+import { useState, useEffect } from "react";
 import { useColorScheme } from "@mui/joy";
 
 export const LogoSvg = () => {
 
-	const colorScheme = useColorScheme();
 
+	const systemColorScheme = useColorScheme();
+	const [colorScheme, setColorScheme] = useState(systemColorScheme);
+  
+	useEffect(() => {
+	  setColorScheme(systemColorScheme);
+	}, [systemColorScheme]);
+	
 	const bgColor = colorScheme.mode === "dark" ? "#FFFFFF" : "#000000";
-	const fillColor = colorScheme.mode === "dark" ? "#000000" : "#FFFFFF";
 	return(<div className="logo" style={{ width: '100%', height: '100%' }}>
 				<svg
 					viewBox="0 0 374.51580364623885 45.892943780073544"
