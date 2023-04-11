@@ -15,10 +15,20 @@ function GenrePicker() {
     return (
         <div className="userInputContainer">
             <div className="buttonContainer">
+                { useAppSelector(selectUserSelectedGenres) < 1 ?
+                    <Button className = "button"
+                        color="success"
+                        disabled={true}
+                        size="md"
+                        variant="solid"
+                        startDecorator={<ArrowRight />}> 
+                        Go
+                    </Button>
+                :
                 <Link component={RouterLink }to='/result' underline="none">
                     <Button className = "button"
                         color="success"
-                        disabled={genres < 1}
+                        disabled={false}
                         size="md"
                         variant="solid"
                         startDecorator={<ArrowRight />}
@@ -28,6 +38,7 @@ function GenrePicker() {
                         Go
                     </Button>
                 </Link>
+            }
             </div>
             <div className="selectContainer">
                 <Autocomplete

@@ -53,18 +53,26 @@ function PlaylistPicker() {
         <div>
             <div className="userInputContainer">
                 <div className="buttonContainer">
-                <Link component={RouterLink} to='/genre-picker' underline="none">
+                { useAppSelector(selectIsPlaylistChosen) ? 
+                    <Link component={RouterLink} to='/genre-picker' underline="none">
+                        <Button className = "button"
+                            color="primary"
+                            disabled={false}
+                            variant="solid"
+                            startDecorator={<ArrowRight/>}
+                            onClick={() => {
+                                dispatch(getPlaylistTracks())
+                            }}> 
+                            Next
+                        </Button>
+                    </Link> : 
                     <Button className = "button"
                         color="primary"
-                        disabled={!useAppSelector(selectIsPlaylistChosen)}
+                        disabled={true}
                         variant="solid"
-                        startDecorator={<ArrowRight/>}
-                        onClick={() => {
-                            dispatch(getPlaylistTracks())
-                        }}> 
+                        startDecorator={<ArrowRight/>}> 
                         Next
-                    </Button>
-                </Link>
+                    </Button> }
                 </div>
                 <div className="selectContainer">
                 <PlaylistSelect/>
