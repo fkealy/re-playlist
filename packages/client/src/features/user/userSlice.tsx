@@ -28,7 +28,7 @@ export const getPlaylistTracks = (): AppThunk => async ( dispatch, getState) => 
     }
 }
 async function fetchPaginatedPlaylistTracks(userPlaylistState, dispatch, offsetCount: number, options: object) {
-    var response = await userPlaylistState.spotifyApi.getPlaylistTracks(userPlaylistState.selectedPlaylist, options);
+    var response = await userPlaylistState.spotifyApi.getPlaylistTracks(userPlaylistState.selectedPlaylist.id, options);
     dispatch(setSelectedPlaylistTracks(response.items));
     console.log(response)
     offsetCount += response.items.length;
@@ -69,7 +69,10 @@ export const userSlice = createSlice({
     initialState: {
         playlists: [] as any[],
         isLoadingPlaylists: true,
-        selectedPlaylist: "",
+        selectedPlaylist: {
+            name: "",
+            id: "",
+          },
         selectedPlaylistTracks: [] as any[],
         isLoadingSelectedPlaylistTracks: true,
         genres: [] as any,
@@ -90,7 +93,11 @@ export const userSlice = createSlice({
 
         // actions for user choosing a playlist
         setSelectedPlaylist: (state, action) => {
-            state.selectedPlaylist = action.payload;
+            if(state.selectedPlaylist != action.payload) {
+                state.selectedPlaylistTracks = [];
+                state.isLoadingSelectedPlaylistTracks = true;
+                state.selectedPlaylist = action.payload;
+            }
         },
         setSelectedPlaylistTracks: (state, action: PayloadAction<Object>) => {
             state.selectedPlaylistTracks = state.selectedPlaylistTracks.concat(action.payload);
@@ -137,7 +144,7 @@ export const {
     } = userSlice.actions;
 export const selectPlaylistNames = (state: RootState) => state.user.playlists.map(playlist => ({ name: playlist.name, id: playlist.id }));
 export const selectIsLoading = (state: RootState) => state.user.isLoadingGenres && state.user.isLoadingPlaylists;
-export const selectIsPlaylistChosen = (state: RootState) => state.user.selectedPlaylist.length > 0;
+export const selectIsPlaylistChosen = (state: RootState) => state.user.selectedPlaylist.name.length > 0;
 export const selectGenres = (state: RootState) => state.user.genres;
 export const selectUserSelectedGenres = (state: RootState) => state.user.selectedGenres;
 

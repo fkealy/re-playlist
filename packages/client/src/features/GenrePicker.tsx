@@ -18,7 +18,7 @@ function GenrePicker() {
                 <Link component={RouterLink }to='/result' underline="none">
                     <Button className = "button"
                         color="success"
-                        disabled={false}
+                        disabled={genres < 1}
                         size="md"
                         variant="solid"
                         startDecorator={<ArrowRight />}

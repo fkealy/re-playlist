@@ -8,13 +8,17 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 
 function PlaylistSelect() {
     const dispatch = useAppDispatch();
-    const handleChange = (value) => {
-        dispatch({type: 'user/setSelectedPlaylist', payload: value})
-    };
+    const handleChange = (name, id) => {
+        console.log(name);
+        dispatch({type: 'user/setSelectedPlaylist', payload: {id: id, name: name}})
+      };
 
     return (
         <Select 
-            onChange={(_, value) => handleChange(value)}
+            onChange={(event, id) => {
+                const target = event?.target as HTMLButtonElement
+                handleChange(target.innerText , id)}
+            }
             className="select"
             variant="plain"
             color="neutral"

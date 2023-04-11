@@ -24,24 +24,40 @@ export const getResults = (): AppThunk => async (dispatch, getState) => {
                 target_loudness: element.loudness,
                 target_liveness: element.liveness,
                 market: state.auth.country,
-                limit: 1,
-                });
-
-                recommendedTrackUris.push(recommendations.tracks[0].uri);
-                dispatch(setLoadingPercentage(100 * recommendedTrackUris.length/tracks.length))
-
-                // Add a 1-second delay after processing every 20 audio features
-                if ((index + 1) % 20 === 0) {
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                limit: 5, // set limit to 5
+            });
+    
+            let addedTrack = false;
+            for (let i = 0; i < recommendations.tracks.length; i++) {
+                const track = recommendations.tracks[i];
+                if (!recommendedTrackUris.includes(track.uri)) {
+                    recommendedTrackUris.push(track.uri);
+                    addedTrack = true;
+                    break; // Break after adding one unique track
                 }
-                } catch (error) {
-                    console.error(`Error fetching recommendations for audio feature ${index}:`, error);
-                }
+            }
+    
+            // If no unique track was found, add a random track
+            if (!addedTrack && recommendations.tracks.length > 0) {
+                const randomIndex = Math.floor(Math.random() * recommendations.tracks.length);
+                const randomTrack = recommendations.tracks[randomIndex];
+                recommendedTrackUris.push(randomTrack.uri);
+            }
+
+            dispatch(setLoadingPercentage(100 * recommendedTrackUris.length/tracks.length))
+
+            // Add a 1-second delay after processing every 20 audio features
+            if ((index + 1) % 20 === 0) {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+            }
+            } catch (error) {
+                console.error(`Error fetching recommendations for audio feature ${index}:`, error);
+            }
         });
 
     // create new playlist with each recommendation
-    const newPlaylist = await spotifyApi.createPlaylist(state.auth.userId, { name: "RE:PLAYLIST" });
-        spotifyApi.addTracksToPlaylist(newPlaylist.id, recommendedTrackUris).then(() => {
+    const newPlaylist = await spotifyApi.createPlaylist(state.auth.userId, { name:  state.user.selectedPlaylist.name + "- [RE:PLAYLIST]"});
+    spotifyApi.addTracksToPlaylist(newPlaylist.id, recommendedTrackUris).then(() => {
         dispatch(setPlaylistId(newPlaylist.id));
         dispatch(setIsLoading(false));
     });
